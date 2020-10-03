@@ -22,9 +22,13 @@ function next(token: string) {
         console.log("bot running: saucisson");
     });
     client.on('message', msg => {
-        if(msg.content.includes("saucisson")) {
-            const image = rel((Math.floor(Math.random() * 6) + 1) + ".jpg");
-            client.user?.send(image);
+        if (msg.content.match(/s{1,2}au(ss|c)i(?:(s{2,3}|c))on[a-z]{0,1}/gi) !== null && msg.author.id !== client.user?.id) {
+            const image = rel("pics/" + (Math.floor(Math.random() * 5) + 1) + ".jpg");
+            msg.channel.send("", {
+                files: [
+                    image
+                ]
+            });
         }
     });
     client.login(token);

@@ -43,9 +43,13 @@ function next(token) {
     });
     client.on('message', function (msg) {
         var _a;
-        if (msg.content.includes("saucisson")) {
-            var image = rel((Math.floor(Math.random() * 6) + 1) + ".jpg");
-            (_a = client.user) === null || _a === void 0 ? void 0 : _a.send(image);
+        if (msg.content.match(/s{1,2}au(ss|c)i(?:(s{2,3}|c))on[a-z]{0,1}/gi) !== null && msg.author.id !== ((_a = client.user) === null || _a === void 0 ? void 0 : _a.id)) {
+            var image = rel("pics/" + (Math.floor(Math.random() * 5) + 1) + ".jpg");
+            msg.channel.send("", {
+                files: [
+                    image
+                ]
+            });
         }
     });
     client.login(token);
